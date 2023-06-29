@@ -1,118 +1,137 @@
-import Image from 'next/image'
-import { Inter } from 'next/font/google'
-
-const inter = Inter({ subsets: ['latin'] })
+import FeedCard from "@/components/FeedCard";
+import { AiOutlineTwitter } from "react-icons/ai";
+import { BiHomeCircle, BiSolidHomeCircle, BiSolidSearch } from "react-icons/bi";
+import { BsBookmarkHeart, BsBookmarkHeartFill } from "react-icons/bs";
+import { FaEnvelopeOpen, FaRegEnvelope } from "react-icons/fa";
+import { FiSearch } from "react-icons/fi";
+import { MdOutlineVerified, MdVerified } from "react-icons/md";
+import { PiDotsThreeCircle, PiDotsThreeCircleFill } from "react-icons/pi";
+import {
+  RiFileList2Fill,
+  RiFileList2Line,
+  RiNotification3Line,
+  RiNotificationFill,
+} from "react-icons/ri";
+import { TiUser, TiUserOutline } from "react-icons/ti";
 
 export default function Home() {
+  interface menu {
+    iconOutlined: React.ReactNode;
+    iconFilled: React.ReactNode;
+    text: string;
+  }
+  let array: menu[] = [
+    {
+      iconOutlined: <BiHomeCircle />,
+      text: "Home",
+      iconFilled: <BiSolidHomeCircle />,
+    },
+    {
+      iconOutlined: <FiSearch />,
+      text: "Explore",
+      iconFilled: <BiSolidSearch />,
+    },
+    {
+      iconOutlined: <RiNotification3Line />,
+      text: "Notifications",
+      iconFilled: <RiNotificationFill />,
+    },
+    {
+      iconOutlined: <FaRegEnvelope />,
+      text: "Messages",
+      iconFilled: <FaEnvelopeOpen />,
+    },
+    {
+      iconOutlined: <RiFileList2Line />,
+      text: "Lists",
+      iconFilled: <RiFileList2Fill />,
+    },
+    {
+      iconOutlined: <BsBookmarkHeart />,
+      text: "Bookmarks",
+      iconFilled: <BsBookmarkHeartFill />,
+    },
+    {
+      iconOutlined: <MdOutlineVerified />,
+      text: "Verified",
+      iconFilled: <MdVerified />,
+    },
+    {
+      iconOutlined: <TiUserOutline />,
+      text: "Profile",
+      iconFilled: <TiUser />,
+    },
+    {
+      iconOutlined: <PiDotsThreeCircle />,
+      text: "More",
+      iconFilled: <PiDotsThreeCircleFill />,
+    },
+  ];
   return (
-    <main
-      className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
-    >
-      <div className="z-10 w-full max-w-5xl items-center justify-between font-mono text-sm lg:flex">
-        <p className="fixed left-0 top-0 flex w-full justify-center border-b border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30">
-          Get started by editing&nbsp;
-          <code className="font-mono font-bold">pages/index.tsx</code>
-        </p>
-        <div className="fixed bottom-0 left-0 flex h-48 w-full items-end justify-center bg-gradient-to-t from-white via-white dark:from-black dark:via-black lg:static lg:h-auto lg:w-auto lg:bg-none">
-          <a
-            className="pointer-events-none flex place-items-center gap-2 p-8 lg:pointer-events-auto lg:p-0"
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className="dark:invert"
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <>
+      <div className=" flex h-screen w-screen px-44">
+        <div className="basis-1/5 flex-col">
+          <div className=" rounded-full  p-1 hover:bg-gray-900 w-fit cursor-pointer ">
+            <AiOutlineTwitter className=" text-2xl " />
+          </div>
+          <ul>
+            {array.map((e, i) => {
+              return (
+                <div
+                  className=" rounded-full my-2 px-2 py-2 hover:bg-slate-900 w-fit cursor-pointer flex items-center"
+                  key={i}
+                >
+                  {/* <AiOutlineTwitter className=" text-lg" /> */}
+                  {e.iconOutlined}
+                  <div className=" text-xs font-semibold mx-2">{e.text}</div>
+                </div>
+              );
+            })}
+          </ul>
+          <button className=" w-10/12 m-2 px-2 py-2 bg-sky-500 rounded-full text-xs font-semibold hover:bg-sky-600 transition-all   1 ">
+            {" "}
+            Tweet
+          </button>
         </div>
+        <div className="basis-1/2 border-x border-gray-700 h-screen flex flex-col overflow-y-scroll scrollbar-hide">
+          <div className=" w-full h-16 border-b border-gray-700 flex-col text-xs backdrop-blur-sm sticky top-0">
+            <div className="h-1/2 p-2 ">Home</div>
+            <div className="w-full h-1/2 flex flex-row justify-center items-center">
+              <div
+                className=" w-1/2 justify-center flex h-full box hover:first-letter:\\7
+              "
+              >
+                <span className="h-full relative flex items-center font-semibold">
+                  for You
+                  <div className="bg-sky-400 h-0.5 rounded-full absolute bottom-0 w-full"></div>
+                </span>
+              </div>
+              <div className=" w-1/2 justify-center flex h-full">
+                <span className="h-full relative flex items-center font-semibold">
+                  following
+                  <div className=" rounded-full absolute bottom-0 w-full"></div>
+                </span>
+              </div>
+            </div>
+          </div>
+          <FeedCard />
+          <FeedCard />
+          <FeedCard />
+          <FeedCard />
+          <FeedCard />
+          <FeedCard />
+          <FeedCard />
+          <FeedCard />
+          <FeedCard />
+          <FeedCard />
+          <FeedCard />
+          <FeedCard />
+          <FeedCard />
+          <FeedCard />
+          <FeedCard />
+        </div>
+        <div className="basis-1/5 ">02</div>
       </div>
-
-      <div className="relative flex place-items-center before:absolute before:h-[300px] before:w-[480px] before:-translate-x-1/2 before:rounded-full before:bg-gradient-radial before:from-white before:to-transparent before:blur-2xl before:content-[''] after:absolute after:-z-20 after:h-[180px] after:w-[240px] after:translate-x-1/3 after:bg-gradient-conic after:from-sky-200 after:via-blue-200 after:blur-2xl after:content-[''] before:dark:bg-gradient-to-br before:dark:from-transparent before:dark:to-blue-700/10 after:dark:from-sky-900 after:dark:via-[#0141ff]/40 before:lg:h-[360px]">
-        <Image
-          className="relative dark:drop-shadow-[0_0_0.3rem_#ffffff70] dark:invert"
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-4 lg:text-left">
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Docs{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Find in-depth information about Next.js features and API.
-          </p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Learn{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Learn about Next.js in an interactive course with&nbsp;quizzes!
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Templates{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Discover and deploy boilerplate example Next.js&nbsp;projects.
-          </p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
-          className="group rounded-lg border border-transparent px-5 py-4 transition-colors hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2 className={`mb-3 text-2xl font-semibold`}>
-            Deploy{' '}
-            <span className="inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none">
-              -&gt;
-            </span>
-          </h2>
-          <p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+    </>
+  );
 }
