@@ -1,4 +1,9 @@
+import { graphqlClient } from "@/clients/api";
 import FeedCard from "@/components/FeedCard";
+import { verifyUserGoogleTokenQuery } from "@/graphql/query/user";
+import { CredentialResponse, GoogleLogin } from "@react-oauth/google";
+import { useCallback } from "react";
+import { toast } from "react-hot-toast";
 import { AiOutlineTwitter } from "react-icons/ai";
 import { BiHomeCircle, BiSolidHomeCircle, BiSolidSearch } from "react-icons/bi";
 import { BsBookmarkHeart, BsBookmarkHeartFill } from "react-icons/bs";
@@ -67,6 +72,27 @@ export default function Home() {
       iconFilled: <PiDotsThreeCircleFill />,
     },
   ];
+  const handleLoginWithGoogle = useCallback(
+    async (cred: CredentialResponse) => {
+      const googleToken = cred.credential;
+      console.log(`🚀 ~ googleToken:`, googleToken);
+      if (!googleToken) return toast.error(`Google token not found`);
+
+      console.log(
+        `🚀 ~ verifyUserGoogleTokenQuery:`,
+        verifyUserGoogleTokenQuery
+      );
+      const { verifyGoogleToken } = await graphqlClient.request(
+        verifyUserGoogleTokenQuery,
+        { token: googleToken }
+      );
+      console.log(`🚀 ~ verifyGoogleToken:`, verifyGoogleToken);
+      if (verifyGoogleToken) {
+        window.localStorage.setItem("__twiiter__token", verifyGoogleToken);
+      }
+    },
+    []
+  );
   return (
     <>
       <div className=" flex h-screen w-screen px-44">
@@ -95,7 +121,7 @@ export default function Home() {
         </div>
         <div className="basis-1/2 border-x border-gray-700 h-screen flex flex-col overflow-y-scroll scrollbar-hide">
           <div className=" w-full h-16 border-b border-gray-700 flex-col text-xs backdrop-blur-sm sticky top-0">
-            <div className="h-1/2 p-2 ">Home</div>
+            <div className="h-1/2 p-2 font-bold">Home</div>
             <div className="w-full h-1/2 flex flex-row justify-center items-center">
               <div
                 className=" w-1/2 justify-center flex h-full box hover:first-letter:\\7
@@ -130,7 +156,12 @@ export default function Home() {
           <FeedCard />
           <FeedCard />
         </div>
-        <div className="basis-1/5 ">02</div>
+        <div className="basis-1/5 ">
+          <div className=" bg-slate-700 p-3 rounded-lg m-2">
+            <h1 className=" text-center">New To Twitter ?</h1>
+            <GoogleLogin onSuccess={handleLoginWithGoogle} />
+          </div>
+        </div>
       </div>
     </>
   );

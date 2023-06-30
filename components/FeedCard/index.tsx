@@ -11,7 +11,7 @@ const FeedCard: React.FC = () => {
     <div className="flex flex-row w-fit justify-evenly  border-b border-slate-700 mx-2 py-4 ">
       <div className="w-24 justify-center flex h-fit ">
         <Image
-          className="rounded-full m-2"
+          className="rounded-full m-2  cursor-pointer"
           width={50}
           height={50}
           src={"https://avatars.githubusercontent.com/u/91016022?v=4"}
@@ -23,13 +23,16 @@ const FeedCard: React.FC = () => {
           <div>
             <div className="flex items-baseline">
               <div className="text-sm font-semibold">Naresh bhosale</div>
-              <div className=" flex text-slate-700 text-xs mx-2">
+              <div className=" cursor-pointer flex text-slate-700 text-xs mx-2">
                 <div>@nareshbhosale.dev</div>
                 <div>Apr 17</div>
               </div>
             </div>
             <div className="flex text-sm">
-              Hey <div className=" text-sky-500 mx-2">@Razorpay</div>
+              Hey{" "}
+              <div className=" text-sky-500 mx-2  cursor-pointer">
+                @Razorpay
+              </div>
             </div>
           </div>
           <div className="m-6 cursor-pointer">
