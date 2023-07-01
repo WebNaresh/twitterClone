@@ -6,3 +6,16 @@ export const verifyUserGoogleTokenQuery = graphql(`
     verifyGoogleToken(token: $token)
   }
 `);
+
+export const getCurrentUserQuery = graphql(`
+  #graphql
+  query GetCurrentUser {
+    getCurrentUser {
+      id
+      firstName
+      email
+      lastName
+      profileImageURL
+    }
+  }
+`);
