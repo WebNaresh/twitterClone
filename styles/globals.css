@@ -32,3 +32,15 @@ body {
 .scrollbar-hide {
   scrollbar-width: none;
 }
+
+*::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  background-color: gray;
+}
+*::-webkit-scrollbar-track {
+  border-radius: 10px;
+}
+
+*::-webkit-scrollbar {
+  width: 5px;
+}
