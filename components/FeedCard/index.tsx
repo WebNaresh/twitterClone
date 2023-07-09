@@ -1,5 +1,6 @@
 import { Tweet } from "@/gql/graphql";
 import Image from "next/image";
+import Link from "next/link";
 import { AiOutlineHeart } from "react-icons/ai";
 import { BiMessageRounded } from "react-icons/bi";
 import { BsThreeDots } from "react-icons/bs";
@@ -12,10 +13,14 @@ interface FeedCardProps {
 
 const FeedCard: React.FC<FeedCardProps> = (props) => {
   const { data } = props;
+
   return (
-    <div className="flex flex-row w-fit justify-evenly  border-b border-slate-700 py-4 ">
-      <div className="w-24 justify-center flex h-fit ">
-        {data?.author?.profileImageURL && (
+    <div className="flex flex-row w-full justify-evenly  border-b border-slate-700 py-4 ">
+      {data?.author?.profileImageURL && (
+        <Link
+          href={`/${data.author.id}`}
+          className="w-24 justify-center flex h-fit "
+        >
           <Image
             className="rounded-full m-2  cursor-pointer"
             width={40}
@@ -23,8 +28,8 @@ const FeedCard: React.FC<FeedCardProps> = (props) => {
             src={data?.author?.profileImageURL}
             alt="User Missing"
           />
-        )}
-      </div>
+        </Link>
+      )}
       <div className="w-full">
         <div className="flex justify-between items-center ">
           <div>
@@ -32,7 +37,7 @@ const FeedCard: React.FC<FeedCardProps> = (props) => {
               <div className="text-sm font-semibold">
                 {data?.author?.firstName} &nbsp;{data?.author?.lastName}
               </div>
-              <div className=" cursor-pointer flex text-slate-700 text-xs mx-2">
+              <div className="cursor-pointer flex text-slate-700 text-xs mx-2">
                 <div> {data?.author?.firstName}&nbsp;</div>
                 <div>Apr 17</div>
               </div>
@@ -49,20 +54,22 @@ const FeedCard: React.FC<FeedCardProps> = (props) => {
             <BsThreeDots />
           </div>
         </div>
-        <div className=" text-sm text-slate-300 mt-4">
+        <div className=" text-sm text-slate-300 mt-4 w-max">
           {data?.imageURL && (
             <Image
-              className="rounded-lg m-2  cursor-pointer"
-              width={200}
-              height={200}
+              className="rounded-lg m-2  cursor-pointer "
+              width={300}
+              height={300}
               src={data.imageURL}
               alt={data.content}
             />
           )}
-          {data?.content}
-          <br />i have gone through documentation and nothing is clear.😢
+          <div className="w-4/5">
+            {data?.content}
+            <br />i have gone through documentation and nothing is clear.😢
+          </div>
         </div>
-        <div className="flex flex-row justify-start gap-10 my-4">
+        <div className="flex flex-row justify-start md:gap-10 gap-2 my-4">
           <div className=" flex cursor-pointer text-gray-700 gap-2">
             {" "}
             <BiMessageRounded className=" text-sm" />
