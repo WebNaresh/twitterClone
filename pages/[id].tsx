@@ -38,7 +38,7 @@ const UserProfilePage: NextPage<Props> = (props) => {
     }
     await graphqlClient.request(followUserMutation, { to: props.user?.id });
     await queryClient.invalidateQueries(["current-user"]);
-  }, []);
+  }, [queryClient, props.user?.id]);
   const handleUnFollowButton = useCallback(async () => {
     console.log("Unfollow");
     if (!props.user?.id) {
@@ -46,7 +46,7 @@ const UserProfilePage: NextPage<Props> = (props) => {
     }
     await graphqlClient.request(unFollowUserMutation, { to: props.user?.id });
     await queryClient.invalidateQueries(["current-user"]);
-  }, []);
+  }, [props.user?.id, queryClient]);
 
   return (
     <TwitterLayout>

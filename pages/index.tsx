@@ -77,7 +77,7 @@ const Home: NextPage<TweetData> = (props: TweetData) => {
     const handleFn = handleInputChangeFile(input);
     input.addEventListener("change", handleFn);
     input.click();
-  }, []);
+  }, [handleInputChangeFile]);
   const handleCreateTweet = useCallback(
     async (e: FormEvent<HTMLFormElement>) => {
       e.preventDefault();
@@ -192,9 +192,10 @@ const Home: NextPage<TweetData> = (props: TweetData) => {
             <h1>User You May Know:</h1>
             <div className="flex flex-col">
               {user?.recommendedUsers?.map(
-                (e) =>
+                (e, i) =>
                   e?.profileImageURL && (
                     <Link
+                      key={i}
                       href={`/${e.id}`}
                       className="flex rounded-md hover:bg-customColor  cursor-pointer"
                     >
