@@ -143,7 +143,7 @@ const Home: NextPage<TweetData> = (props: TweetData) => {
                 {imageUrl.length > 0 && (
                   <Image
                     src={imageUrl}
-                    alt="tweetImage"
+                    alt="tweetImage rounded-md"
                     width={300}
                     height={300}
                   />
